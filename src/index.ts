@@ -1,8 +1,8 @@
 import express from "express";
 
 const app = express();
+const PORT = 3000;
 
-
-app.listen(3000, () => {
-    console.log('El servidor se está ejecutando correctamente')
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
