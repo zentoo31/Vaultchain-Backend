@@ -35,3 +35,9 @@ nyc_output/
 
 # Optional cache
 .c
+/src/generated/prisma
+# Prisma
+prisma/dev.db
+prisma/dev.sqlite
+prisma/migrations/
+*.db-journal
