@@ -21,12 +21,20 @@ export class AuthService {
 
         const hashedPassword = await bcrypt.hash(registerDto.password, 10);
     
-        return await this.prisma.user.create({
+        const newUser =  await this.prisma.user.create({
             data: {
                 email: registerDto.email,
                 password: hashedPassword,
             },
         });
+
+        await this.prisma.profile.create({
+            data: {
+                userId: newUser.id
+            }
+        });
+        
+        return newUser;
     }
     
     async findUserByEmail(email: string) {
