@@ -14,7 +14,7 @@ export class AuthController {
         registerDto.email = req.body.email;
         registerDto.password = req.body.password;
 
-        const user = await this.authService.registerUser(registerDto);
-        res.status(201).json(user);
+        await this.authService.registerUser(registerDto);
+        res.status(201).json({ message: "User registered successfully" });
     }
 }
