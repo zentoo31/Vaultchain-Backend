@@ -1,5 +1,5 @@
 import { UpdateInfoDTO } from "./dto/update-info.dto";
-import { Prisma, PrismaClient } from "../../generated/prisma";
+import { PrismaClient } from "../../generated/prisma";
 
 export class ProfileInfoService{
     private prisma: PrismaClient;
@@ -7,6 +7,19 @@ export class ProfileInfoService{
     constructor() {
         this.prisma = new PrismaClient();
     }
+
+    async getProfileInfo(userId: string){
+        const profile = await this.prisma.profile.findUnique({
+            where: { userId: userId },
+        });
+
+        if (!profile) {
+            throw new Error("Profile not found");
+        }
+
+        return profile;
+    }
+
 
     async updateProfileInfo(userId: string, updateInfoDto: UpdateInfoDTO) {
         const { bio, avatarUrl } = updateInfoDto;
