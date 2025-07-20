@@ -1,6 +1,7 @@
 import { validate } from "class-validator";
 import { PrismaClient } from "../../generated/prisma";
 import { RegisterDTO } from "./dto/register.dto";
+import { LoginDTO } from "./dto/login.dto";
 import bcrypt from "bcrypt";
 
 export class AuthService {
@@ -36,6 +37,26 @@ export class AuthService {
         
         return newUser;
     }
+
+    async loginUser(loginDto: LoginDTO){
+        const errors = await validate(loginDto);
+        if (errors.length > 0) {
+            throw new Error("Validation failed!");
+        }
+
+        const user = await this.findUserByEmail(loginDto.email);
+        if (!user) {
+            throw new Error("User not found!");
+        }
+
+        const isPasswordValid = await bcrypt.compare(loginDto.password, user.password);
+        if (!isPasswordValid) {
+            throw new Error("Invalid password!");
+        }
+
+        return user;
+    }
+
     
     async findUserByEmail(email: string) {
         return await this.prisma.user.findUnique({
