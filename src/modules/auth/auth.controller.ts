@@ -43,9 +43,8 @@ export class AuthController {
             })
             .status(200)
             .json({
-                message: "Login successful",
-                token: token
-            });
+                message: "Login successful"
+        });
     }
 
     logout = async (req: Request, res: Response) => {
