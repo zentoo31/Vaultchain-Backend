@@ -1,4 +1,3 @@
----
  
 # 🛡️ VaultChain Backend
  
@@ -6,7 +5,6 @@
  
 Este repositorio contiene el backend desarrollado en **Node.js + Express**, con **PostgreSQL** como base de datos, **Prisma** como ORM y **bitcoinjs-lib** para manejo de direcciones y transacciones Bitcoin.
  
----
  
 ## 🚀 Tecnologías principales
  
