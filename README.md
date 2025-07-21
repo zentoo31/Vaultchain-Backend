@@ -18,7 +18,7 @@ Este repositorio contiene el backend desarrollado en **Node.js + Express**, con 
 ---
  
 ## 📁 Estructura del proyecto
- 
+```bash
 vaultchain-backend/ 
 ├── prisma/ 
 │   └── schema.prisma          # Definición de modelos 
@@ -33,7 +33,7 @@ vaultchain-backend/
 ├── .env                        # Variables de entorno 
 ├── package.json 
 └── README.md
- 
+ ```
 ---
  
 ## ⚙️ Configuración
