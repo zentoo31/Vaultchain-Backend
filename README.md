@@ -21,17 +21,15 @@ Este repositorio contiene el backend desarrollado en **Node.js + Express**, con 
  
 vaultchain-backend/ 
 ├── prisma/ 
-    │   
-    └── schema.prisma          # Definición de modelos 
-├── src/ 
-    │   
-    ├── controllers/            # Lógica de negocio  
-    ├── routes/                 # Rutas de Express  
-    ├── middlewares/            # Autenticación, validaciones  
-    ├── services/               # Lógica de escrow y Bitcoin  
-    ├── utils/                  # Helpers varios 
-    ├── app.ts                  # Registra todas las rutas y middlewares
-    ├── server.ts               # Punto de entrada del backend 
+│   └── schema.prisma          # Definición de modelos 
+├── src/   
+│   ├── controllers/            # Lógica de negocio   
+│   ├── routes/                 # Rutas de Express  
+│   ├── middlewares/            # Autenticación, validaciones  
+│   ├── services/               # Lógica de escrow y Bitcoin  
+│   ├── utils/                  # Helpers varios 
+│   ├── app.ts                  # Registra todas las rutas y middlewares
+│   ├── server.ts               # Punto de entrada del backend 
 ├── .env                        # Variables de entorno 
 ├── package.json 
 └── README.md
