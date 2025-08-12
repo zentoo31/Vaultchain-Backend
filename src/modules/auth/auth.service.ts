@@ -3,6 +3,7 @@ import { PrismaClient } from "../../generated/prisma";
 import { RegisterDTO } from "./dto/register.dto";
 import { LoginDTO } from "./dto/login.dto";
 import bcrypt from "bcrypt";
+import { HttpError } from "../../utils/http.errors";
 
 export class AuthService {
     private prisma: PrismaClient;
@@ -41,17 +42,17 @@ export class AuthService {
     async loginUser(loginDto: LoginDTO){
         const errors = await validate(loginDto);
         if (errors.length > 0) {
-            throw new Error("Validation failed!");
+            throw new HttpError(400,"Validation failed!");
         }
 
         const user = await this.findUserByEmail(loginDto.email);
         if (!user) {
-            throw new Error("User not found!");
+            throw new HttpError(401,"User not found!");
         }
 
         const isPasswordValid = await bcrypt.compare(loginDto.password, user.password);
         if (!isPasswordValid) {
-            throw new Error("Invalid password!");
+            throw new HttpError(401,"Invalid password!");
         }
 
         return user;
