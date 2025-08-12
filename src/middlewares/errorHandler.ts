@@ -1,13 +1,16 @@
 import { Request, Response, NextFunction } from "express";
-
+import { HttpError } from "../utils/http.errors";
 export function errorHandler(
-    err: any,
+    err: Error,
     req: Request,
     res: Response,
-    _next: NextFunction
-){
-    console.error(err.startus);
-    res.status(err.status || 500).json({
-        message: err.message || "Internal Server Error",
-    });
+    next: NextFunction
+) {
+    console.error(err.stack);
+    
+    if (err instanceof HttpError) {
+        return res.status(err.statusCode).json({ error: err.message });
+    }
+    
+    res.status(500).json({ error: "Internal server error" });
 }
