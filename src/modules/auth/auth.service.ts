@@ -15,7 +15,7 @@ export class AuthService {
     async registerUser(registerDto: RegisterDTO) {
         const errors = await validate(registerDto);
         if (errors.length > 0) {
-            throw new Error("Validation failed!");
+            throw new HttpError(400,"Validation failed!");
         }
 
         const existingUser = await this.findUserByEmail(registerDto.email);
