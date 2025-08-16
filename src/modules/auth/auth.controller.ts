@@ -47,6 +47,10 @@ export class AuthController {
         });
     }
 
+    verifyToken = async (req: Request, res: Response) => {
+        res.status(200).json({ message: "Token is valid" });
+    }
+
     logout = async (req: Request, res: Response) => {
         res
             .clearCookie('token')

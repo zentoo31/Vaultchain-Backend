@@ -7,6 +7,7 @@ const authController = new AuthController();
 
 authRouter.post("/register", catchAsync(authController.register));
 authRouter.post("/login", catchAsync(authController.login));
+authRouter.get("/verify-token", catchAsync(authController.verifyToken))
 authRouter.post("/logout", catchAsync(authController.logout));
 
 export default authRouter;
