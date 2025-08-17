@@ -39,6 +39,7 @@ export class AuthController {
             .cookie('token', token, {
                 httpOnly: true,
                 secure: false,
+                sameSite: 'lax',
                 maxAge: 3600000
             })
             .status(200)
