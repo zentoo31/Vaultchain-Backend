@@ -6,7 +6,7 @@ import { randomBytes } from 'crypto';
 
 export class WalletGenerator {
     private readonly derivationPath = "m/44'/0'/0'/0/0";
-    private readonly network = networks.bitcoin;
+    private readonly network = networks.testnet;
     
     async generateWalletPerUser(): Promise<any> {
         try {
