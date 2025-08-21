@@ -30,11 +30,7 @@ export class AuthService {
         const newUser =  await this.prisma.user.create({
             data: {
                 email: registerDto.email,
-                password: hashedPassword,
-                bitcoinAddress: wallet.address,
-                privateKey: wallet.privateKey,
-                publicKey: wallet.publicKey,
-                mnemonicPhrase: wallet.mnemonic
+                password: hashedPassword
             },
         });
 
@@ -43,6 +39,16 @@ export class AuthService {
                 userId: newUser.id
             }
         });
+
+        await this.prisma.wallet.create({
+            data: {
+                userId: newUser.id,
+                bitcoinAddress: wallet.address,
+                privateKey: wallet.privateKey,
+                publicKey: wallet.publicKey,
+                mnemonicPhrase: wallet.mnemonic
+            }
+        })
         
         return newUser;
     }
