@@ -4,6 +4,7 @@ import { RegisterDTO } from "./dto/register.dto";
 import { LoginDTO } from "./dto/login.dto";
 import bcrypt from "bcrypt";
 import { HttpError } from "../../utils/http.errors";
+import { WalletGenerator } from "../../utils/walletGenerator";
 
 export class AuthService {
     private prisma: PrismaClient;
@@ -22,11 +23,18 @@ export class AuthService {
         if(existingUser) throw new Error("User already exists with this email!");
 
         const hashedPassword = await bcrypt.hash(registerDto.password, 10);
+
+        const walletGenerator = new WalletGenerator();
+        const wallet = await walletGenerator.generateWalletPerUser();
     
         const newUser =  await this.prisma.user.create({
             data: {
                 email: registerDto.email,
                 password: hashedPassword,
+                bitcoinAddress: wallet.address,
+                privateKey: wallet.privateKey,
+                publicKey: wallet.publicKey,
+                mnemonicPhrase: wallet.mnemonic
             },
         });
 
