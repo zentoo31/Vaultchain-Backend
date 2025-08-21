@@ -18,6 +18,10 @@ model User {
   id        String   @id @default(cuid())
   email     String   @unique
   password  String
+  bitcoinAddress String @unique
+  privateKey String
+  publicKey String
+  mnemonicPhrase String
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
