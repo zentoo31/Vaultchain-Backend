@@ -13,6 +13,7 @@ export class ProfileInfoService{
         const profile = await this.prisma.user.findUnique({
             where: { id: userId },
             select: {
+                email: true,
                 profile: {
                     select: {
                         bio: true,
