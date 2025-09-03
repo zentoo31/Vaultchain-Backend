@@ -23,6 +23,7 @@ model User {
   updatedAt DateTime @updatedAt
   profile   Profile?
   wallet    Wallet?
+  uploads   Upload[]
   
   @@map("user")
 }
@@ -47,4 +48,16 @@ model Profile{
   user      User     @relation(fields: [userId], references: [id])
 
   @@map("profile")
+}
+
+model Upload{
+  id        String   @id @default(cuid())
+  fileName  String
+  fileSize  Int
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("upload")
 }
